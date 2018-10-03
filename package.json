@@ -1,0 +1,30 @@
+{
+  "name": "skill-loop",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dzarrillo/Skill-Loop.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/dzarrillo/Skill-Loop/issues"
+  },
+  "homepage": "https://github.com/dzarrillo/Skill-Loop#readme",
+  "dependencies": {
+    "axios": "^0.16.2",
+    "express": "^4.16.3",
+    "if-env": "^1.0.4",
+    "mongoose": "^5.2.9",
+    "morgan": "^1.9.0",
+    "mysql": "^2.16.0",
+    "mysql2": "^1.6.1",
+    "sequelize": "^4.38.1"
+  }
+}
