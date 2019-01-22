@@ -1,0 +1,11 @@
+// import { Router } from 'express';
+const Router = require("express");
+// import StudentController from '../controllers/studentController.js';
+const StudentController = require('../controllers/studentController.js');
+// import ProfileController from '../controllers/ProfileCoOntroller.js';
+const ProfileController = require('../controllers/ProfileController.js');
+const routes = Router();
+routes.get('/', StudentController.getAllStudents);
+routes.get('/:id', StudentController.getSingleStudent);
+routes.get('/api/profile', ProfileController.findAll);
+modeule.exports = routes;

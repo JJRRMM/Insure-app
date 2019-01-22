@@ -16,10 +16,10 @@ const connection = mysql.createConnection({
     database: 'insure_app_db'
 });
 
-const routes = require("./routes");
+const routes = require("./routes/index");
 
 // const routes = require('./routes');
-const PORT = process.env.PORT || 3001;
+const PORT = process.env.PORT || 4001;
 var app = express();
 
 
@@ -32,7 +32,7 @@ if (process.env.NODE_ENV === "production") {
     app.use(express.static("client/build"));
 }
 
-// Add routes, both API and view
+// Add routes, both API and view CHANGED LINE BELOW: 1/22/2019 
 app.use(routes);
 // var db = require("./models");
 // Connect to the Mongo DB

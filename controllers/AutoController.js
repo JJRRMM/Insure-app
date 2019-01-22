@@ -1,45 +1,39 @@
-// const db = require("../models");
-// Profile = require('../models/Profile.js')(sequelize, Sequelize);
-// Profile = require('../models/Profile.js');
+
 const mysql = require("mysql");
 // Connection info for the ProfileController
 const connection = mysql.createConnection({
-  // host: '127.0.0.1',
   host: '192.168.1.27',
   user: 'root',
   password: 'root',
-  database: 'insure_app_db'  
+  database: 'insure_app_db'
 });
 connection.connect();
 // export methods to the routes/api.profile.js file  
 module.exports = {
     findAll: function(req, res) {      
-      connection.query("Select * from profiles", function ( error, results, fields){
+      connection.query("Select * from automobile", function ( error, results, fields){
       if (error) throw error;
-         res.status(200).send(results)     
+         res.send(results)     
     });    
   },     
     findOne: function(req, res) {
-      const id = req.params.id;    
-      console.log(id);  
-      connection.query("Select * from profiles where id =" + id, function ( error, results, fields){
+      const id = req.params.id;      
+      connection.query("Select * from automobile where id =" + id, function ( error, results, fields){
       if (error) throw error;
          res.send(results)     
     }) 
   },      
     create: function(req, res) {
     // const id = req.params.id;
-    const firstname = req.body.firstname;
-    const first = '"' + firstname + '"'; 
-    const lastname = '"' + req.body.lastname + '"';
-    const adrr_line1 = '"' + req.body.adrr_line1 + '"';
-    const city = '"' + req.body.city +'"';
-    const State = '"' + req.body.State + '"';
-    const zip = '"' + req.body.zip + '"';
-    console.log (" In the profile controller create");
-    var query = "insert into profiles (" +
-                "firstname, lastname,adrr_line1,city,State,zip)"  + " values " +
-                "( " + first + "," + lastname + "," + adrr_line1 + "," + city + "," + State + "," + zip + ")"                 
+    const profile_id = req.body.profile_id;
+    const make = '"' + req.body.vechile_make + '"'; 
+    const model = '"' + req.body.vechile_model + '"';
+    const year =  req.body.year;
+    const vechile_id = '"' + req.body.vechile_id_number +'"';
+    console.log (" In the auto  controller create");
+    var query = "insert into automobile (" +
+                "profile_id, vechile_make,vechile_model,vechile_year,vechile_id_number)"  + " values " +
+                "(" + profile_id + "," + make + "," + model + "," + year + "," + vechile_id + ")"                 
     console.log(query);
     // connection.query("insert into profiles (id,firstname) values (" + id +  ",`" + firstname +"`)")
     connection.query(query)

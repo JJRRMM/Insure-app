@@ -1,6 +1,6 @@
 
 
-  import axios from "axios";
+import axios from "axios";
 
 export default {
   // Get Resume
@@ -12,6 +12,7 @@ export default {
 
     return axios.get("/api/skillSet");
   },
+  // get profiles
   getProfile: function() {
     return axios.get("/api/profile/");
   },
@@ -20,5 +21,9 @@ export default {
   },
   saveProfile: function(profileData) {
     return axios.post("/api/profile", profileData);
+  },  
+    // get automobile
+  getAuto: function() {
+    return axios.get("/api/auto");
   }
 };

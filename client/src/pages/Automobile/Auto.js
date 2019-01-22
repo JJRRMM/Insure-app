@@ -6,34 +6,34 @@ import { Col, Row, Container } from "../../components/Grid";
 import { List, ListItem } from "../../components/List";
 import { Input, TextArea, FormBtn } from "../../components/Form";
 
-class Books extends Component {
+class Auto extends Component {
   // Setting our component's initial state
   state = {  
-    profiles: [],
-    id: "",
-    firstname: "",
-    lastname: "",
-    state: "",
-    city: "",
-    zip: ""   
+    autos: [],  
+    id: "",  
+    profile_id: "", 
+    vechile_make: "",
+    vechile_model: "",
+    vechile_year: "",
+    vechile_id_Number: ""   
   };
 
   // When the component mounts, load all books and save them to this.state.books
   componentDidMount() {
-    this.loadProfile();
+    this.loadAuto();
   }
 
   // Loads all books  and sets them to this.state.books
-  loadProfile = () => {
-    API.getProfile()
+  loadAutoe = () => {
+    API.getAuto()
       .then(res =>
-        this.setState({ profiles: res.data, id: "", firstname: "", lastname: "", city: "", state: "" , zip: ""  })
+        this.setState({ autos: res.data, id: "", profile_id : "", vechile_make: "", vechile_make: "", vechile_year: "", vechile_id_Number: ""  })
       )
       .catch(err => console.log(err));
   };
 
   // Deletes a book from the database with a given id, then reloads books from the db
-  deleteProfile = id => {
+  deleteProfile = id => {   
     API.deleteProfile(id)
       .then(res => this.loadProfile())
       .catch(err => console.log(err));
@@ -51,12 +51,15 @@ class Books extends Component {
   // Then reload books from the database
   handleFormSubmit = event => {
     event.preventDefault();
+    console.log(" First name is below : ");
+    console.log(this.state.firstname);
     if (this.state.firstname && this.state.lastname) {
-      API.saveBook({
+      API.saveProfile({
         firstname: this.state.firstname,
         lastname: this.state.lastname,
         adrr_line1: this.state.adrr_line1,
         city: this.state.city,
+        State: this.state.State,
         zip: this.state.zip
       })
         .then(res => this.loadProfile())
@@ -76,37 +79,37 @@ class Books extends Component {
               <Input
                 value={this.state.firstname}
                 onChange={this.handleInputChange}
-                name="FirstName"
+                name="firstname"
                 placeholder="First name (required)"
               />
               <Input
                 value={this.state.lastname}
                 onChange={this.handleInputChange}
-                name="Last name"
+                name="lastname"
                 placeholder="Last Name (required)"
               />
               <Input
                 value={this.state.adrr_line1}
                 onChange={this.handleInputChange}
-                name="Address Line 1"
+                name="adrr_line1"
                 placeholder="Address line (optional)"
               />
               <Input
                 value={this.state.city}
                 onChange={this.handleInputChange}
-                name="City"
+                name="city"
                 placeholder="City (optional)"
               />
               <Input
-                value={this.state.state}
+                value={this.state.State}
                 onChange={this.handleInputChange}
-                name="State "
+                name="State"
                 placeholder="State (optional)"
               />   
               <Input
                 value={this.state.zip}
                 onChange={this.handleInputChange}
-                name="Zip "
+                name="zip"
                 placeholder="Zip (optional)"
               />         
               <FormBtn
@@ -119,27 +122,28 @@ class Books extends Component {
           </Col>
           <Col size="md-6 sm-12">
             <Jumbotron>
-              <h1>Profiles t</h1>
+              <h1>All Automobiles </h1>
             </Jumbotron>
-            {this.state.profiles.length ? (
+            {this.state.autos.length ? (
               <List>
-                {this.state.profiles.map(book => {
+                {this.state.autos.map(profile => {
                   return (
-                    <ListItem key={profilebook._id}>
-                      <a href={"/profile/" + book._id}>
+                    <ListItem key={profile.id}>
+                      <a href={"/profiles/" + profile.id}>
                         <strong>
                           <p>Named Insured</p> 
-                          {profile.firstname}  {profile.lastname}
+                          {profile.firstname}  {profile.lastname} {" "} {profile.id}
                         </strong>
                         <strong>
                           <p>Mailing Address</p>
                           {profile.adrr_line1}
-                          {profile.city}
-                          {profile.state}
-                          {profile.zip} 
+                          <p> 
+                          {profile.city} {" "}
+                          {profile.State}
+                          {profile.zip}</p>  
                         </strong>
                       </a>
-                      <DeleteBtn onClick={() => this.deleteProfile(book._id)} />
+                      <DeleteBtn onClick={() => this.deleteProfile(profile.id)} />
                     </ListItem>
                   );
                 })}

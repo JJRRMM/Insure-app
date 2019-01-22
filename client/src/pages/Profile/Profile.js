@@ -122,7 +122,7 @@ class Profile extends Component {
           </Col>
           <Col size="md-6 sm-12">
             <Jumbotron>
-              <h1>All Profiles in database</h1>
+              <h1>All Profiles </h1>
             </Jumbotron>
             {this.state.profiles.length ? (
               <List>
